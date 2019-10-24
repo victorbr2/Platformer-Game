@@ -9,6 +9,7 @@
 
 j1Input::j1Input() : j1Module()
 {
+
 	name.create("input");
 
 	keyboard = new j1KeyState[MAX_KEYS];
