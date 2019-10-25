@@ -1,4 +1,6 @@
-﻿  j1Collision.cpp
-  j1Window.cpp
-  Generando código...
-  Motor2D.vcxproj -> C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Debug\Motor 2D.exe
+﻿  j1App.cpp
+  j1Map.cpp
+  j1Player.cpp
+  j1Scene.cpp
+  Generating Code...
+  Motor2D.vcxproj -> C:\Users\victorbr2\Desktop\Platformer-Game\Debug\Motor 2D.exe
