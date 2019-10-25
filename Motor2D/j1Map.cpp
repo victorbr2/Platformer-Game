@@ -31,31 +31,46 @@ void j1Map::Draw()
 	if (map_loaded == false)
 		return;
 
-	// TODO 4: Make sure we draw all the layers and not just the first one
-	for (p2List_item<MapLayer*>* layer = this->data.layers.start; layer; layer = layer->next)
+	p2List_item<MapLayer*>* item = data.layers.start;
+
+	for (; item != NULL; item = item->next)
 	{
+		MapLayer* layer = item->data;
+
+		if (layer->properties.Get("Nodraw") != 0)
+			continue;
+
 		for (int y = 0; y < data.height; ++y)
 		{
 			for (int x = 0; x < data.width; ++x)
 			{
-				uint tile_id = layer->data->Get(x, y);
+				int tile_id = layer->Get(x, y);
 				if (tile_id > 0)
 				{
 					TileSet* tileset = GetTilesetFromTileId(tile_id);
-					if (tileset != nullptr)
-					{
-						SDL_Rect r = tileset->GetTileRect(tile_id);
-						iPoint pos = MapToWorld(x, y);
 
-						App->render->Blit(tileset->texture, pos.x, pos.y, &r,App->render->drawsize);
-					}
+					SDL_Rect r = tileset->GetTileRect(tile_id);
+					iPoint pos = MapToWorld(x, y);
+
+					App->render->Blit(tileset->texture, pos.x, pos.y, &r, App->render->drawsize);
 				}
 			}
 		}
 	}
+}
 
+int Properties::Get(const char* value, int default_value) const
+{
+	p2List_item<Property*>* item = list.start;
 
+	while (item)
+	{
+		if (item->data->name == value)
+			return item->data->value;
+		item = item->next;
+	}
 
+	return default_value;
 }
 
 TileSet* j1Map::GetTilesetFromTileId(int id) const
@@ -382,19 +397,23 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 }
 bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 {
-	bool ret = true;
+	bool ret = false;
 
-	for (pugi::xml_node nodeProperty = node.child("properties").child("property"); nodeProperty; nodeProperty = nodeProperty.next_sibling("property"))
+	pugi::xml_node data = node.child("properties");
+
+	if (data != NULL)
 	{
-		if (nodeProperty.attribute("name").as_string() == "Draw")
-		{
-			properties.Draw = nodeProperty.attribute("value").as_uint();
-		}
-		if (nodeProperty.attribute("name").as_string() == "Navigation")
-		{
-			properties.Navigation = nodeProperty.attribute("value").as_uint();
-		}
+		pugi::xml_node prop;
 
+		for (prop = data.child("property"); prop; prop = prop.next_sibling("property"))
+		{
+			Properties::Property* p = new Properties::Property();
+
+			p->name = prop.attribute("name").as_string();
+			p->value = prop.attribute("value").as_int();
+
+			properties.list.add(p);
+		}
 	}
 
 	return ret;
