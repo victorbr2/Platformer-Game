@@ -55,7 +55,7 @@ bool Player::Start()
 {
 	LOG("Loading player");
 	
-	player_text = App->tex->Load("Assets/Sprites/Terry Bogard/Terry Sprites.png");
+	player_text = App->tex->Load("Game/textures/Character.png");
 	//jumpfx = App->audio->Load_effects("Assets/Audio/Fx/SFX_Landing.wav");
 	//colPlayer = App->collision->AddCollider({ position.x, position.y, 34, 106 }, COLLIDER_PLAYER);
 	health = 1;

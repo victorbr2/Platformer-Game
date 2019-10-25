@@ -1,6 +1,6 @@
-﻿  j1App.cpp
-  j1Map.cpp
-  j1Player.cpp
-  j1Scene.cpp
+﻿  j1Player.cpp
+  j1Render.cpp
+C:\Users\victorbr2\Documents\GitHub\Platformer-Game\Motor2D\j1Render.cpp(133,35): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
   Generating Code...
-  Motor2D.vcxproj -> C:\Users\victorbr2\Desktop\Platformer-Game\Debug\Motor 2D.exe
+C:\Users\victorbr2\Documents\GitHub\Platformer-Game\Motor2D\j1Render.cpp(134,35): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+  Motor2D.vcxproj -> C:\Users\victorbr2\Documents\GitHub\Platformer-Game\Debug\Motor 2D.exe
