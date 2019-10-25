@@ -10,6 +10,8 @@
 #include "p2SString.h"
 #include "PugiXml\src\pugixml.hpp"
 
+struct Collider;
+
 class j1App;
 
 class j1Module
@@ -42,19 +44,19 @@ public:
 	// Called each loop iteration
 	virtual bool PreUpdate()
 	{
-		return true;
+		return UPDATE_CONTINUE;
 	}
 
 	// Called each loop iteration
 	virtual bool Update(float dt)
 	{
-		return true;
+		return UPDATE_CONTINUE;
 	}
 
 	// Called each loop iteration
 	virtual bool PostUpdate()
 	{
-		return true;
+		return UPDATE_CONTINUE;
 	}
 
 	// Called before quitting
@@ -93,13 +95,22 @@ public:
 		}
 	}
 
+	
 	// Callbacks ---
-	//virtual void OnCollision(Collider*, Collider*) {}
+	virtual void OnCollision(Collider*, Collider*) {}
+
+	enum update_status
+	{
+		UPDATE_CONTINUE = 1,
+		UPDATE_STOP,
+		UPDATE_ERROR
+	};
+
 public:
 
 	p2SString	name;
 	bool		active;
-
+	
 };
 
 #endif // __j1MODULE_H__

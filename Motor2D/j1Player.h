@@ -5,6 +5,7 @@
 #include "p2Point.h"
 #include "j1Module.h"
 #include "Animation.h"
+#include "j1App.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -18,14 +19,17 @@ enum player_status
 	PLAYER_IN_JUMP_FINISH,
 };
 
-class Player : public j1Module
+class j1Player : public j1Module
 {
 public:
-	Player();
-	~Player();
+	j1Player();
+	~j1Player();
+
+
 
 	bool Start();
-	bool CleanUp();
+	bool Update(float dt) override;
+	bool CleanUp() override;
 
 public:
 
@@ -42,7 +46,7 @@ public:
 	int health = 1;
 	player_status status = PLAYER_IDLE;
 	Uint32 jump_timer = 0;
-
+	SDL_Rect r;
 
 };
 

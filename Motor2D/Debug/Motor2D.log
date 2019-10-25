@@ -1,21 +1,15 @@
-﻿  j1Collision.cpp
-  j1FadeToBlack.cpp
-  j1Main.cpp
-  j1App.cpp
-  j1Audio.cpp
-  j1Input.cpp
-  j1Map.cpp
+﻿  j1App.cpp
+  j1Collision.cpp
   j1Player.cpp
-  j1Scene.cpp
-  p2Log.cpp
-  j1Render.cpp
-C:\Users\LUCERO\Desktop\Platformer-Game\Motor2D\j1Render.cpp(133,35): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\LUCERO\Desktop\Platformer-Game\Motor2D\j1Render.cpp(134,35): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\LUCERO\Desktop\Platformer-Game\Motor2D\j1Render.cpp(146,22): warning C4244: '*=': conversión de 'float' a 'int'; posible pérdida de datos
-  j1Textures.cpp
-  j1Window.cpp
-  pugixml.cpp
+C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(135,29): warning C4244: '-=': conversión de 'float' a 'TYPE'; posible pérdida de datos
+C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(135,29): warning C4244:         with
+C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(135,29): warning C4244:         [
+C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(135,29): warning C4244:             TYPE=int
+C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(135,29): warning C4244:         ]
   Generando código...
-C:\Users\LUCERO\Desktop\Platformer-Game\Motor2D\j1Render.cpp(147,22): warning C4244: '*=': conversión de 'float' a 'int'; posible pérdida de datos
-  LINK : no se encontró C:\Users\LUCERO\Desktop\Platformer-Game\Debug\Motor 2D.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
-  Motor2D.vcxproj -> C:\Users\LUCERO\Desktop\Platformer-Game\Debug\Motor 2D.exe
+C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(155,29): warning C4244: '+=': conversión de 'float' a 'TYPE'; posible pérdida de datos
+C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(155,29): warning C4244:         with
+C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(155,29): warning C4244:         [
+C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(155,29): warning C4244:             TYPE=int
+C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(155,29): warning C4244:         ]
+  Motor2D.vcxproj -> C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Debug\Motor 2D.exe

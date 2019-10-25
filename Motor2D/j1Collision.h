@@ -46,7 +46,8 @@ public:
 	j1Collision();
 	~j1Collision();
 
-
+	bool PreUpdate() override;
+	bool Update(float dt) override;
 
 	bool CleanUp() override;
 

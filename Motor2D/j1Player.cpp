@@ -1,30 +1,41 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "j1Module.h"
 #include "j1Input.h"
 #include "j1Textures.h"
 #include "j1Audio.h"
 #include "j1Render.h"
+#include "j1Collision.h"
+#include "j1Player.h"
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Scene.h"
-#include "j1Player.h"
 #include "SDL_image/include/SDL_image.h"
 
 
- Player :: Player()
+ j1Player :: j1Player()
 {
 	position.x = 16;
 	position.y = 160;
 
 	// idle animation
-	idle.PushBack({ 28, 208, 62, 105 });
-	idle.PushBack({ 97, 208, 60, 106 });
-	idle.PushBack({ 163, 208, 60, 105 });
+	idle.PushBack({ 2, 8, 21, 34 });
+	idle.PushBack({ 23, 8, 21, 34 });
+	idle.PushBack({ 44, 8, 21, 34 });
+	idle.PushBack({ 65, 8, 21, 34 });
+	idle.PushBack({ 86, 7, 21, 35 });
+	idle.PushBack({ 107, 7, 21, 35 });
+	idle.PushBack({ 128, 7, 21, 35 });
+	idle.PushBack({ 149, 7, 21, 35 });
+	idle.PushBack({ 170, 8, 21, 34 });
+	idle.PushBack({ 191, 9, 21, 33 });
+	idle.PushBack({ 212, 9, 21, 33 });
+	idle.PushBack({ 233, 9, 21, 33 });
 	idle.speed = 0.1f;
 
 	//forward
-	forward.PushBack({ 15, 337, 60, 106 });
+	/*forward.PushBack({ 15, 337, 60, 106 });
 	forward.PushBack({ 90, 337, 70, 107 });
 	forward.PushBack({ 170, 337, 62, 108 });
 	forward.PushBack({ 247, 337, 60, 107 });
@@ -44,41 +55,167 @@
 	jump.PushBack({ 593, 185, 59, 158 });
 	jump.speed = 0.12f;
 
-
+	*/
 
 }
-Player::~Player()
+j1Player::~j1Player()
 {}
 
 // Load assets
-bool Player::Start()
+bool j1Player::Start()
 {
 	LOG("Loading player");
-	
+	App->col->Enable();
 	player_text = App->tex->Load("Game/textures/Character.png");
 	//jumpfx = App->audio->Load_effects("Assets/Audio/Fx/SFX_Landing.wav");
-	//colPlayer = App->collision->AddCollider({ position.x, position.y, 34, 106 }, COLLIDER_PLAYER);
+	colPlayer = App->col->AddCollider({ position.x, position.y, 34, 106 }, COLLIDER_PLAYER);
 	health = 1;
 	return true;
 }
 
 // Unload assets
-bool Player::CleanUp()
+bool j1Player::CleanUp()
 {
-	/*LOG("Unloading player");
+	LOG("Unloading player");
 	if (!IsEnabled()) {
-		App->collision->Disable();
-		SDL_DestroyTexture(graphicsTerry);
+		App->col->Disable();
+		SDL_DestroyTexture(player_text);
 		//Audio
-		App->sounds->Unload_effects(punchfx);
-		App->sounds->Unload_effects(kickfx);
-		App->sounds->Unload_effects(jumpfx);
-		App->sounds->Unload_effects(specialfx);
-		App->sounds->Unload_effects(winfx);
-		App->sounds->Unload_effects(defeatfx);
+		//App->sounds->Unload_effects(jumpfx);
+		
 		//Disable
-		App->player->Disable();
+		App->play->Disable();
 	}
-	*/
+	
 	return true;
+}
+
+bool j1Player::Update(float dt) {
+		
+	float speed = 2;
+
+	if (input) {
+
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+			status = PLAYER_BACKWARD;
+
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+			status = PLAYER_FORWARD;
+
+		else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+			status = PLAYER_JUMP;
+
+		else {
+			status = PLAYER_IDLE;
+
+		}
+	}
+		switch (status)
+		{
+		case PLAYER_IDLE:
+			current_animation = &idle;
+			position.y = 160;
+
+			colPlayer->type = COLLIDER_PLAYER;
+			break;
+
+		case PLAYER_BACKWARD:
+			
+				if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+					if (jumpEnable == true) {
+						jumpEnable = false;
+						jump.Reset();
+						/*if (App->sounds->Play_chunk(jumpfx))
+						{
+							LOG("Could not play select sound. Mix_PlayChannel: %s", Mix_GetError());
+						}*/
+						jump_timer = 1;
+					}
+				if (position.x < 10) { position.x -= 0; }
+				else position.x -= speed;
+				current_animation = &backward;
+				colPlayer->type = COLLIDER_PLAYER;
+				
+		
+			break;
+
+		case PLAYER_FORWARD:
+
+				if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+					if (jumpEnable == true) {
+						jumpEnable = false;
+						jump.Reset();
+						/*if (App->sounds->Play_chunk(jumpfx))
+						{
+							LOG("Could not play select sound. Mix_PlayChannel: %s", Mix_GetError());
+						}*/
+						jump_timer = 1;
+					}
+				if (position.x > 590) { position.x -= 0; }
+				else position.x += speed;
+				current_animation = &forward;
+				colPlayer->type = COLLIDER_PLAYER;
+				
+			
+			break;
+
+		case PLAYER_JUMP:
+			if (jumpEnable == true) {
+				jumpEnable = false;
+				jump.Reset();
+				/*if (App->sounds->Play_chunk(jumpfx))
+				{
+					LOG("Could not play select sound. Mix_PlayChannel: %s", Mix_GetError());
+				}*/
+				jump_timer = 1;
+			}
+			break;
+
+		case PLAYER_IN_JUMP_FINISH:
+			status = PLAYER_IDLE;
+			jump.Reset();
+			break;
+
+		if (jump_timer > 0)
+			{
+				jump_timer = jump_timer + 1;
+				current_animation = &jump;
+				if (jump_timer < 8) { colPlayer->SetPos(position.x + 12, position.y - 140); }
+				else if (jump_timer < 29) { colPlayer->SetPos(position.x + 12, position.y - 180); }
+				else if (jump_timer < 38) { colPlayer->SetPos(position.x + 12, position.y - 165); }
+
+				if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) { position.x--; }
+				if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) { position.x++; }
+
+				if (jump_timer > 38)
+				{
+					jumpEnable = true;
+					status = PLAYER_IN_JUMP_FINISH;
+					jump_timer = 0;
+				}
+			}
+
+	}
+
+		if (jump_timer == 0) {
+			//Normal collider position
+			colPlayer->SetPos(position.x + 12, position.y - 107);
+			
+		}
+
+		// Draw everything --------------------------------------
+
+		r = current_animation->GetCurrentFrame();
+
+		if (App->play->position.x < position.x) { App->render->Blit(player_text, position.x, position.y - r.h, &r, 1, SDL_FLIP_HORIZONTAL); }
+		
+
+		r.x = position.x;
+		r.y = position.y;
+
+		return UPDATE_CONTINUE;
+
+
+
+
 }
