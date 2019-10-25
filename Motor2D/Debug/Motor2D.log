@@ -1,6 +1,20 @@
-﻿  j1Player.cpp
+﻿  pugixml.cpp
+  j1App.cpp
+  j1Audio.cpp
+  j1Collision.cpp
+  j1Input.cpp
+  j1Main.cpp
+  j1Map.cpp
+  j1Player.cpp
   j1Render.cpp
-C:\Users\victorbr2\Documents\GitHub\Platformer-Game\Motor2D\j1Render.cpp(133,35): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\victorbr2\Desktop\Platformer-Game\Motor2D\j1Render.cpp(133,35): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\victorbr2\Desktop\Platformer-Game\Motor2D\j1Render.cpp(134,35): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\victorbr2\Desktop\Platformer-Game\Motor2D\j1Render.cpp(146,22): warning C4244:  '*=': conversion from 'float' to 'int', possible loss of data
+  j1Scene.cpp
+  j1Textures.cpp
+  j1Window.cpp
+  p2Log.cpp
   Generating Code...
-C:\Users\victorbr2\Documents\GitHub\Platformer-Game\Motor2D\j1Render.cpp(134,35): warning C4244:  '=': conversion from 'float' to 'int', possible loss of data
-  Motor2D.vcxproj -> C:\Users\victorbr2\Documents\GitHub\Platformer-Game\Debug\Motor 2D.exe
+C:\Users\victorbr2\Desktop\Platformer-Game\Motor2D\j1Render.cpp(147,22): warning C4244:  '*=': conversion from 'float' to 'int', possible loss of data
+  LINK : C:\Users\victorbr2\Desktop\Platformer-Game\Debug\Motor 2D.exe not found or not built by the last incremental link; performing full link
+  Motor2D.vcxproj -> C:\Users\victorbr2\Desktop\Platformer-Game\Debug\Motor 2D.exe
