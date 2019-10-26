@@ -10,9 +10,10 @@ enum COLLIDER_TYPE
 	COLLIDER_NONE = -1,
 	COLLIDER_WALL,
 	COLLIDER_PLAYER,
-	COLLIDER_ENEMY,
-	COLLIDER_PLAYER_SHOT,
-	COLLIDER_ENEMY_SHOT,
+	COLLIDER_BOX,
+	COLLIDER_SPIKES,
+	COLLIDER_LAVA,
+	COLLIDER_COLUMN,
 
 	COLLIDER_MAX
 };
@@ -46,7 +47,7 @@ public:
 	j1Collision();
 	~j1Collision();
 
-	bool PreUpdate() override;
+	bool PostUpdate() override;
 	bool Update(float dt) override;
 
 	bool CleanUp() override;

@@ -13,15 +13,47 @@ j1Collision::j1Collision()
 
 	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_WALL][COLLIDER_ENEMY] = true;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER_SHOT] = true;
-	matrix[COLLIDER_WALL][COLLIDER_ENEMY_SHOT] = true;
+	matrix[COLLIDER_WALL][COLLIDER_BOX] = true;
+	matrix[COLLIDER_WALL][COLLIDER_LAVA] = false;
+	matrix[COLLIDER_WALL][COLLIDER_SPIKES] = true;
+	matrix[COLLIDER_WALL][COLLIDER_COLUMN] = true;
 
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER_SHOT] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_BOX] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_SPIKES] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_LAVA] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_COLUMN] = true;
+
+	matrix[COLLIDER_BOX][COLLIDER_BOX] = false;
+	matrix[COLLIDER_BOX][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_BOX][COLLIDER_WALL] = true;
+	matrix[COLLIDER_BOX][COLLIDER_SPIKES] = true;
+	matrix[COLLIDER_BOX][COLLIDER_LAVA] = true;
+	matrix[COLLIDER_BOX][COLLIDER_COLUMN] = true;
+
+	matrix[COLLIDER_LAVA][COLLIDER_WALL] = false;
+	matrix[COLLIDER_LAVA][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_LAVA][COLLIDER_BOX] = true;
+	matrix[COLLIDER_LAVA][COLLIDER_SPIKES] = true;
+	matrix[COLLIDER_LAVA][COLLIDER_LAVA] = false;
+	matrix[COLLIDER_LAVA][COLLIDER_COLUMN] = false;
+
+	matrix[COLLIDER_SPIKES][COLLIDER_WALL] = true;
+	matrix[COLLIDER_SPIKES][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_SPIKES][COLLIDER_BOX] = true;
+	matrix[COLLIDER_SPIKES][COLLIDER_SPIKES] = false;
+	matrix[COLLIDER_SPIKES][COLLIDER_LAVA] = true;
+	matrix[COLLIDER_SPIKES][COLLIDER_COLUMN] = true;
+
+	matrix[COLLIDER_COLUMN][COLLIDER_WALL] = true;
+	matrix[COLLIDER_COLUMN][COLLIDER_COLUMN] = false;
+	matrix[COLLIDER_COLUMN][COLLIDER_SPIKES] = true;
+	matrix[COLLIDER_COLUMN][COLLIDER_BOX] = true;
+	matrix[COLLIDER_COLUMN][COLLIDER_LAVA] = false;
+	matrix[COLLIDER_COLUMN][COLLIDER_PLAYER] = true;
+
+
 
 }
 
@@ -29,7 +61,7 @@ j1Collision::j1Collision()
 // Destructor
 j1Collision::~j1Collision()
 {}
-bool j1Collision::PreUpdate()
+bool j1Collision::Update(float dt)
 {
 	// Remove all colliders scheduled for deletion
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
@@ -76,7 +108,7 @@ bool j1Collision::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-bool j1Collision::Update(float dt)
+bool j1Collision::PostUpdate()
 {
 
 	DebugDraw();
@@ -107,6 +139,18 @@ void j1Collision::DebugDraw()
 			break;
 		case COLLIDER_WALL: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+
+		case COLLIDER_LAVA: // orange
+			App->render->DrawQuad(colliders[i]->rect, 255, 144, 51, alpha);
+
+		case COLLIDER_BOX: // yellow
+			App->render->DrawQuad(colliders[i]->rect, 255, 230, 51, alpha);
+
+		case COLLIDER_COLUMN: // purple
+			App->render->DrawQuad(colliders[i]->rect, 184, 51, 255, alpha);
+
+		case COLLIDER_SPIKES: // light blue
+			App->render->DrawQuad(colliders[i]->rect, 51, 233, 255, alpha);
 	
 		}
 	}
@@ -146,6 +190,7 @@ Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* 
 }
 
 // -----------------------------------------------------
+
 
 bool Collider::CheckCollision(const SDL_Rect& r) const
 {

@@ -21,6 +21,8 @@ enum player_status
 
 class j1Player : public j1Module
 {
+
+
 public:
 	j1Player();
 	~j1Player();
@@ -30,6 +32,7 @@ public:
 	bool Start();
 	bool Update(float dt) override;
 	bool CleanUp() override;
+	
 
 public:
 

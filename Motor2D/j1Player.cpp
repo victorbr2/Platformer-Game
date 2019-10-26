@@ -35,27 +35,29 @@
 	idle.speed = 0.1f;
 
 	//forward
-	/*forward.PushBack({ 15, 337, 60, 106 });
-	forward.PushBack({ 90, 337, 70, 107 });
-	forward.PushBack({ 170, 337, 62, 108 });
-	forward.PushBack({ 247, 337, 60, 107 });
+	forward.PushBack({ 2, 43, 23, 34 });
+	forward.PushBack({ 26, 45, 20, 32 });
+	forward.PushBack({ 47, 45, 17, 32 });
+	forward.PushBack({ 64, 45, 20, 32 });
+	forward.PushBack({ 86, 43, 20, 34 });
+	forward.PushBack({ 106, 45, 19, 32 });
+	forward.PushBack({ 126, 45, 20, 32 });
+	forward.PushBack({ 147, 45, 23, 32 });
 	forward.speed = 0.125f;
 
 	//backwards
-	backward.PushBack({ 16, 460, 58, 107 });
-	backward.PushBack({ 96, 457, 62, 107 });
-	backward.PushBack({ 179, 457, 62, 107 });
+	backward.PushBack({ 191, 46, 19, 36 });
+	backward.PushBack({ 217, 45, 20, 36 });
+
 	backward.speed = 0.125f;
 
 	
 	//Jump animation
-	jump.PushBack({ 15, 337, 60, 106 });
-	jump.PushBack({ 468, 163, 52, 170 });
-	jump.PushBack({ 528, 156, 65, 185 });
-	jump.PushBack({ 593, 185, 59, 158 });
+	jump.PushBack({ 191, 83, 22, 36 });
+	jump.PushBack({ 215, 83, 22, 37 });
 	jump.speed = 0.12f;
 
-	*/
+	
 
 }
 j1Player::~j1Player()
@@ -66,9 +68,9 @@ bool j1Player::Start()
 {
 	LOG("Loading player");
 	App->col->Enable();
-	player_text = App->tex->Load("Game/textures/Character.png");
+	player_text = App->tex->Load("textures/Character.png");
 	//jumpfx = App->audio->Load_effects("Assets/Audio/Fx/SFX_Landing.wav");
-	colPlayer = App->col->AddCollider({ position.x, position.y, 34, 106 }, COLLIDER_PLAYER);
+	colPlayer = App->col->AddCollider({ position.x, position.y, 21, 34 }, COLLIDER_PLAYER);
 	health = 1;
 	return true;
 }
@@ -89,6 +91,10 @@ bool j1Player::CleanUp()
 	
 	return true;
 }
+
+
+
+
 
 bool j1Player::Update(float dt) {
 		
@@ -204,18 +210,15 @@ bool j1Player::Update(float dt) {
 		}
 
 		// Draw everything --------------------------------------
-
 		r = current_animation->GetCurrentFrame();
 
-		if (App->play->position.x < position.x) { App->render->Blit(player_text, position.x, position.y - r.h, &r, 1, SDL_FLIP_HORIZONTAL); }
-		
+		App->render->Blit(player_text, position.x, position.y - r.h, &r, 1, SDL_FLIP_HORIZONTAL);
+
 
 		r.x = position.x;
 		r.y = position.y;
+		
 
 		return UPDATE_CONTINUE;
-
-
-
 
 }
