@@ -1,15 +1,2 @@
-﻿  j1App.cpp
-  j1Collision.cpp
-  j1Player.cpp
-C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(135,29): warning C4244: '-=': conversión de 'float' a 'TYPE'; posible pérdida de datos
-C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(135,29): warning C4244:         with
-C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(135,29): warning C4244:         [
-C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(135,29): warning C4244:             TYPE=int
-C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(135,29): warning C4244:         ]
-  Generando código...
-C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(155,29): warning C4244: '+=': conversión de 'float' a 'TYPE'; posible pérdida de datos
-C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(155,29): warning C4244:         with
-C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(155,29): warning C4244:         [
-C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(155,29): warning C4244:             TYPE=int
-C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Motor2D\j1Player.cpp(155,29): warning C4244:         ]
-  Motor2D.vcxproj -> C:\Users\preda\OneDrive\Escritorio\Platformer-Game\Debug\Motor 2D.exe
+﻿  j1Map.cpp
+  Motor2D.vcxproj -> C:\Users\LUCERO\Desktop\Platformer-Game\Debug\Motor 2D.exe
