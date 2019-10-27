@@ -28,6 +28,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new j1Scene();
 	map = new j1Map();
 	col = new j1Collision();
+	play = new j1Player();
 	
 	
 
@@ -37,8 +38,11 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(map);
 	AddModule(scene);
+	AddModule(map);
+	AddModule(play);
+	
+
 	
 	// render last to swap buffer
 	AddModule(render);
