@@ -16,8 +16,8 @@
 
  j1Player :: j1Player()
 {
-	position.x = 16;
-	position.y = 160;
+	position.x = 32;
+	position.y = 384;
 
 	// idle animation
 	idle.PushBack({ 2, 8, 21, 34 });
@@ -32,7 +32,7 @@
 	idle.PushBack({ 191, 9, 21, 33 });
 	idle.PushBack({ 212, 9, 21, 33 });
 	idle.PushBack({ 233, 9, 21, 33 });
-	idle.speed = 0.1f;
+	idle.speed = 0.075f;
 
 	//forward
 	forward.PushBack({ 2, 43, 23, 34 });
@@ -43,13 +43,13 @@
 	forward.PushBack({ 106, 45, 19, 32 });
 	forward.PushBack({ 126, 45, 20, 32 });
 	forward.PushBack({ 147, 45, 23, 32 });
-	forward.speed = 0.125f;
+	forward.speed = 0.1f;
 
 	//backwards
 	backward.PushBack({ 191, 46, 19, 36 });
 	backward.PushBack({ 217, 45, 20, 36 });
 
-	backward.speed = 0.125f;
+	backward.speed = 0.05f;
 
 	
 	//Jump animation
@@ -98,7 +98,7 @@ bool j1Player::CleanUp()
 
 bool j1Player::Update(float dt) {
 		
-	float speed = 2;
+	float speed = 1;
 
 	if (input) {
 
@@ -120,7 +120,7 @@ bool j1Player::Update(float dt) {
 		{
 		case PLAYER_IDLE:
 			current_animation = &idle;
-			position.y = 160;
+			position.y = 384;
 
 			colPlayer->type = COLLIDER_PLAYER;
 			break;
