@@ -33,6 +33,9 @@ public:
 	bool Update(float dt) override;
 	bool CleanUp() override;
 	
+	// Load / Save
+	bool Load(pugi::xml_node&);
+	bool Save(pugi::xml_node&) const;
 
 public:
 

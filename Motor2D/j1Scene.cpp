@@ -32,7 +32,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	App->map->Load("lvl-1-v2.tmx");
-	
+	App->audio->PlayMusic("audio/music/dungeon.ogg");
 
 	return true;
 }
@@ -50,21 +50,38 @@ bool j1Scene::Update(float dt)
 	{
 		App->map->CleanUp();
 		App->map->Load("lvl-1-v2.tmx");
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
+		App->play->position.x = 32;
+		App->play->position.y = 384;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		App->map->CleanUp();
 		App->map->Load("lvl-2.tmx");
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
+		App->play->position.x = 32;
+		App->play->position.y = 384;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
-		App->LoadGame("save_game.xml");
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
+		App->render->camera.x = 0;
+		App->render->camera.y = 0;
+		App->play->position.x = 32;
+		App->play->position.y = 384;
+	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 		App->SaveGame("save_game.xml");
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	    App->LoadGame("save_game.xml");
+	
+
+	/*if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 1;
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
@@ -75,6 +92,8 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 1;
+		*/
+		
 
 	App->map->Draw();
 
