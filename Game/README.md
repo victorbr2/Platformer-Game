@@ -10,7 +10,11 @@ Project about making a platformer game for our game dev subject.
 
 - Javi Trillo
 
+	Tasks:
+
 - Victor Bosch
+
+	Tasks: Tiled map 1, map 1 load, map camera, character load/animations, adding/changing modules.
 
 ### Github
 
@@ -24,3 +28,4 @@ Project about making a platformer game for our game dev subject.
 
 -Tileset: Dungeon-platformer-tileset by RottingPixels: https://rottingpixels.itch.io/platformer-dungeon-tileset
 	Download site: https://itch.io/
+
